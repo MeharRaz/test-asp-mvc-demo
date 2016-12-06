@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="categoryandproductModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="categoryandproductEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="tbl_category" EntityType="categoryandproductModel.tbl_category" />
+    <EntitySet Name="tbl_product" EntityType="categoryandproductModel.tbl_product" />
+    <AssociationSet Name="FK_tbl_category_tbl_category" Association="categoryandproductModel.FK_tbl_category_tbl_category">
+      <End Role="tbl_category" EntitySet="tbl_category" />
+      <End Role="tbl_category1" EntitySet="tbl_category" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_product_tbl_category" Association="categoryandproductModel.FK_tbl_product_tbl_category">
+      <End Role="tbl_category" EntitySet="tbl_category" />
+      <End Role="tbl_product" EntitySet="tbl_product" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="tbl_category">
+    <Key>
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="CategoryId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="tbl_category1" Relationship="categoryandproductModel.FK_tbl_category_tbl_category" FromRole="tbl_category" ToRole="tbl_category1" />
+    <NavigationProperty Name="tbl_category2" Relationship="categoryandproductModel.FK_tbl_category_tbl_category" FromRole="tbl_category1" ToRole="tbl_category" />
+    <NavigationProperty Name="tbl_product" Relationship="categoryandproductModel.FK_tbl_product_tbl_category" FromRole="tbl_category" ToRole="tbl_product" />
+  </EntityType>
+  <EntityType Name="tbl_product">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="Phonenum" Type="Int32" Nullable="false" />
+    <Property Name="CategoryId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tbl_category" Relationship="categoryandproductModel.FK_tbl_product_tbl_category" FromRole="tbl_product" ToRole="tbl_category" />
+    <Property Type="String" Name="Image" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_tbl_category_tbl_category">
+    <End Role="tbl_category" Type="categoryandproductModel.tbl_category" Multiplicity="1" />
+    <End Role="tbl_category1" Type="categoryandproductModel.tbl_category" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_category">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="tbl_category1">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_product_tbl_category">
+    <End Role="tbl_category" Type="categoryandproductModel.tbl_category" Multiplicity="1" />
+    <End Role="tbl_product" Type="categoryandproductModel.tbl_product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_category">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="tbl_product">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,73 @@
+﻿@model MvcApplicationDBApproach.Models.tbl_product
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>tbl_product</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProductId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ProductId)
+            @Html.ValidationMessageFor(model => model.ProductId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Price)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Price)
+            @Html.ValidationMessageFor(model => model.Price)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Phonenum)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Phonenum)
+            @Html.ValidationMessageFor(model => model.Phonenum)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CategoryId, "tbl_category")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("CategoryId", String.Empty)
+            @Html.ValidationMessageFor(model => model.CategoryId)
+        </div>
+         <div class="editor-label">
+            @Html.LabelFor(model => model.Image)
+        </div>
+          <div class="editor-field">
+             @Html.EditorFor(model => model.Image)
+            @Html.ValidationMessageFor(model => model.Image)
+        </div>
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

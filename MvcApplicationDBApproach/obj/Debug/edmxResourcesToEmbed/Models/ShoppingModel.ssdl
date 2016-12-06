@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="categoryandproductModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="categoryandproductModelStoreContainer">
+    <EntitySet Name="tbl_category" EntityType="categoryandproductModel.Store.tbl_category" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tbl_product" EntityType="categoryandproductModel.Store.tbl_product" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_tbl_category_tbl_category" Association="categoryandproductModel.Store.FK_tbl_category_tbl_category">
+      <End Role="tbl_category" EntitySet="tbl_category" />
+      <End Role="tbl_category1" EntitySet="tbl_category" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_product_tbl_category" Association="categoryandproductModel.Store.FK_tbl_product_tbl_category">
+      <End Role="tbl_category" EntitySet="tbl_category" />
+      <End Role="tbl_product" EntitySet="tbl_product" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="tbl_category">
+    <Key>
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tbl_product">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Price" Type="decimal" Nullable="false" />
+    <Property Name="Phonenum" Type="int" Nullable="false" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+    <Property Name="Image" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_tbl_category_tbl_category">
+    <End Role="tbl_category" Type="categoryandproductModel.Store.tbl_category" Multiplicity="1" />
+    <End Role="tbl_category1" Type="categoryandproductModel.Store.tbl_category" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_category">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="tbl_category1">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_product_tbl_category">
+    <End Role="tbl_category" Type="categoryandproductModel.Store.tbl_category" Multiplicity="1" />
+    <End Role="tbl_product" Type="categoryandproductModel.Store.tbl_product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_category">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="tbl_product">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
